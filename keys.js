@@ -1,4 +1,4 @@
-console.log("keys.js is loaded");
+// console.log("\nkeys.js is loaded");
 
 var twitterKeys = {
   consumer_key: "2i62EnUS6hThh0NHSV6nIN5il",
@@ -7,4 +7,10 @@ var twitterKeys = {
   access_token_secret: "pwDPECkFo2Bqyfcs2PuBs21pmVKAlJ2idVV2V3eX3PT2Q",
 }
 
-module.exports = {twitterKeys: twitterKeys}
+var spotifyKeys = {
+        id: "370fc808b7694ccb8ec87fe5737051a4",
+        secret: "91c9c4b1ae4741baa23b2a6d229e7a77"
+ }
+
+module.exports = {twitterKeys: twitterKeys,
+				spotifyKeys: spotifyKeys}
