@@ -36,6 +36,7 @@ function getMovie() {
 
     request(queryUrl, function(error, response, body) {
 
+        //Log movie info to terminal
         console.log("\n==========OMDB==========");
         console.log("Title: " + JSON.parse(body).Title);
         console.log("Year: " + JSON.parse(body).Year);
@@ -46,6 +47,19 @@ function getMovie() {
         console.log("Plot: " + JSON.parse(body).Plot);
         console.log("Actors: " + JSON.parse(body).Actors);
         console.log("=======================\n");
+
+        //Append movie info to log.txt
+        fs.appendFile("log.txt", "\nTitle: " + JSON.parse(body).Title + "\n", function(err) {});
+        fs.appendFile("log.txt", "Year: " + JSON.parse(body).Year + "\n", function(err) {});
+        fs.appendFile("log.txt", "IMDB Rating: " + JSON.parse(body).imdbRating + "\n", function(err) {});
+        fs.appendFile("log.txt", "Rotton Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value + "\n", function(err) {});
+        fs.appendFile("log.txt", "Country: " + JSON.parse(body).Country + "\n", function(err) {});
+        fs.appendFile("log.txt", "Language: " + JSON.parse(body).Language + "\n", function(err) {});
+        fs.appendFile("log.txt", "Plot: " + JSON.parse(body).Plot + "\n", function(err) {});
+        fs.appendFile("log.txt", "Actors: " + JSON.parse(body).Actors + "\n", function(err) {});
+        fs.appendFile("log.txt", "\n==================================", function(err) {});
+        
+        console.log("Your movie info was also added to log.txt!\n");
     });
 }; //End getMovie function
 
@@ -62,15 +76,22 @@ function twitter() {
     client.get("statuses/user_timeline", function(error, tweets, response) {
 
         // console.log(tweets);
-
         console.log("LucyKeegan10 tweeted...\n")
+
+        fs.appendFile("log.txt", "\nLucyKeegan10 tweeted.....\n", function(err) {});
 
         for(var i = 0; i < tweets.length; i++){
 
             console.log(tweets[i].created_at);
             console.log(tweets[i].text);
             console.log("\n==========================\n")
+
+        //Append movie info to log.txt
+        fs.appendFile("log.txt", "\n" + tweets[i].created_at + "\n", function(err) {});
+        fs.appendFile("log.txt", "\n" + tweets[i].text + "\n", function(err) {});
+        fs.appendFile("log.txt", "\n============================\n", function(err) {});
         }
+        console.log("Your tweets were also added to log.txt!\n");
     });
 }; //End twitter function
 
@@ -113,13 +134,23 @@ function getSpotify() {
                 console.log('Error occurred: ' + err);
                 return;
             }
-            // console.log(data.tracks.items[0]);
+
+            //Log Song infor to terminal
             console.log("\n=========SPOTIFY===========");
             console.log("Song Title: " + data.tracks.items[0].name);
             console.log("Artist: " + data.tracks.items[0].artists[0].name);
             console.log("Spotify Link: " + data.tracks.items[0].preview_url);
             console.log("Album Name: " + data.tracks.items[0].album.name);
             console.log("=============================\n");
+
+            //Append song info to log.txt
+            fs.appendFile("log.txt", "\nSong Title: " + data.tracks.items[0].name + "\n", function(err) {});
+            fs.appendFile("log.txt", "Artist: " + data.tracks.items[0].artists[0].name + "\n", function(err) {});
+            fs.appendFile("log.txt", "Spotify Link: " + data.tracks.items[0].preview_url + "\n", function(err) {});
+            fs.appendFile("log.txt", "Album Name: " + data.tracks.items[0].album.name + "\n", function(err) {});
+            fs.appendFile("log.txt", "\n==================================\n", function(err) {});
+
+            console.log("Your song info was also added to log.txt!\n");
         });
     }
 }; //End spotify function
